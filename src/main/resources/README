@@ -34,7 +34,7 @@ A Spring Boot-based Translation Management Service that supports localization vi
   - `translation`
   - `tag`
   - `translation_tag_mapping` (join table)
----
+- All SQL scripts are present in TMS_SCHEMA_DDL.sql
 
 ### Prerequisites
 
