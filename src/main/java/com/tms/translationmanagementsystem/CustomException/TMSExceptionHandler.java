@@ -2,6 +2,7 @@ package com.tms.translationmanagementsystem.CustomException;
 
 import com.tms.translationmanagementsystem.Utils.Response;
 import com.tms.translationmanagementsystem.Utils.ResponseCodesEnum;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -15,13 +16,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Hidden
 @ControllerAdvice
 public class TMSExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(TranslationException.class)
     public ResponseEntity<Object> handleTranslationExceptions(TranslationException ex, WebRequest request) {
-
         ResponseCodesEnum codeEnum;
 
         // Decide which response code to use based on the actual exception class
@@ -40,14 +40,13 @@ public class TMSExceptionHandler extends ResponseEntityExceptionHandler {
         // Wrap in generic response
         Response<ExceptionResponse> response = new Response<>(codeEnum.status(), getClass().getSimpleName(), codeEnum.code(), responseBody);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ResponseCodesEnum.SUCCESS.code()));
     }
 
     // FIXED: Updated method signature for Spring Boot 3.x
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status,     // Changed from HttpStatus to HttpStatusCode
                                                                   WebRequest request) {
-
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         String message = fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(", "));
 
@@ -55,6 +54,8 @@ public class TMSExceptionHandler extends ResponseEntityExceptionHandler {
 
         Response<ExceptionResponse> response = new Response<>(ResponseCodesEnum.BAD_REQUEST.status(), "MethodArgumentNotValidException", ResponseCodesEnum.BAD_REQUEST.code(), body);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(ResponseCodesEnum.SUCCESS.code()));
+
     }
+
 }

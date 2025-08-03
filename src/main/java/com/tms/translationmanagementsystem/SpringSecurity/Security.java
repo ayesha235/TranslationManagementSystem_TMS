@@ -34,11 +34,9 @@ public class Security {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(authz -> authz
                 // Allow Swagger endpoints
-                .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs").permitAll()
+                .requestMatchers("/swagger-ui/**", "/swagger-ui.index.html", "/v3/api-docs/**", "/v3/api-docs", "/error").permitAll()
                 // Allow authentication endpoints
                 .requestMatchers("/tms/login/**").permitAll()
-                // Allow public endpoints
-                .requestMatchers("/public/**").permitAll()
                 // All other requests need authentication
                 .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
