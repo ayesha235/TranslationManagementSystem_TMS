@@ -1,0 +1,63 @@
+# Translation Management System (TMS)
+
+A Spring Boot-based Translation Management Service that supports localization via dynamic key-value translation mappings and tag associations. This system is built with PostgreSQL and includes Swagger documentation for easy API exploration.
+
+---
+
+## Tech Stack
+
+- **Java 17+**
+- **Spring Boot 3+**
+- **PostgreSQL**
+- **Spring Data JPA**
+- **Swagger/OpenAPI**
+- **Lombok**
+- **Maven**
+
+---
+
+## 🗂Features
+
+- CRUD operations for translations and tags
+- Many-to-many relationship between translations and tags
+- Unique constraint on `(translationKey, locale)`
+- Swagger UI for interactive API testing
+- Modular schema under `tms`
+
+---
+
+## Database
+
+- **PostgreSQL** is used as the primary relational database.
+- All tables are under the schema: `tms`
+- Schema includes:
+  - `translation`
+  - `tag`
+  - `translation_tag_mapping` (join table)
+---
+
+### Prerequisites
+
+- Java 17+
+- Maven
+- PostgreSQL installed and running
+
+### Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/ayesha235/TranslationManagementSystem_TMS.git
+
+
+2. Before using protected endpoints, you must log in to obtain a token.
+Username: admin
+Password: password
+
+curl --location 'http://localhost:8080/tms/login' \
+--header 'Content-Type: application/json' \
+--data '{
+  "username": "admin",
+  "password": "password"
+}'
+
+
