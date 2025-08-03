@@ -39,17 +39,17 @@ public class LoginController {
                 tokenResponse.put("username", userDetails.getUsername());
                 tokenResponse.put("message", "Login successful");
 
-                Response<?> response= new Response<>(ResponseCodesEnum.SUCCESS.status(),getClass().getName(),ResponseCodesEnum.SUCCESS.code(),tokenResponse);
+                Response<?> response = new Response<>(ResponseCodesEnum.SUCCESS.status(), getClass().getName(), ResponseCodesEnum.SUCCESS.code(), tokenResponse);
 
                 return ResponseEntity.ok(response);
             } else {
                 Map<String, Object> errorResponse = new HashMap<>();
                 errorResponse.put("message", "Invalid credentials");
-                Response<?> response= new Response<>(ResponseCodesEnum.UNAUTHORIZED.status(),getClass().getName(),ResponseCodesEnum.UNAUTHORIZED.code(),errorResponse);
+                Response<?> response = new Response<>(ResponseCodesEnum.UNAUTHORIZED.status(), getClass().getName(), ResponseCodesEnum.UNAUTHORIZED.code(), errorResponse);
                 return ResponseEntity.badRequest().body(response);
             }
         } catch (Exception e) {
-            Response<?> response= new Response<>(ResponseCodesEnum.UNAUTHORIZED.status(),getClass().getName(),ResponseCodesEnum.UNAUTHORIZED.code(),null);
+            Response<?> response = new Response<>(ResponseCodesEnum.UNAUTHORIZED.status(), getClass().getName(), ResponseCodesEnum.UNAUTHORIZED.code(), null);
             return ResponseEntity.badRequest().body(response);
         }
     }

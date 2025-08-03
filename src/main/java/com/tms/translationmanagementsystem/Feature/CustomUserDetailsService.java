@@ -18,7 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // This is a simple implementation. In a real application, you would fetch user from database
         if ("admin".equals(username)) {
             return new User("admin", passwordEncoder.encode("password"), new ArrayList<>());
         } else if ("user".equals(username)) {
@@ -28,7 +27,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
     }
 
-    // Method to authenticate user (you can expand this for database integration)
     public boolean authenticate(String username, String password) {
         try {
             UserDetails userDetails = loadUserByUsername(username);

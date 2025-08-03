@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class MapperService {
 
-    public TranslationResponse domainToDto(Translation domain){
+    public TranslationResponse domainToDto(Translation domain) {
         if (domain == null) {
             return null;
         }
@@ -22,22 +22,20 @@ public class MapperService {
         dto.setLocale(domain.getLocale());
         dto.setTranslationKey(domain.getTranslationKey());
 
-        if(domain.getTags() != null && !domain.getTags().isEmpty()) {
-            dto.setTags(domain.getTags().stream()
-                .map(tag -> {
-                    TagResponse tagResponse = new TagResponse();
-                    tagResponse.setId(tag.getId());
-                    tagResponse.setTagName(tag.getTagName());
-                    return tagResponse;
-                })
-                .collect(Collectors.toSet()));
+        if (domain.getTags() != null && !domain.getTags().isEmpty()) {
+            dto.setTags(domain.getTags().stream().map(tag -> {
+                TagResponse tagResponse = new TagResponse();
+                tagResponse.setId(tag.getId());
+                tagResponse.setTagName(tag.getTagName());
+                return tagResponse;
+            }).collect(Collectors.toSet()));
         } else {
             dto.setTags(null);
         }
         return dto;
     }
 
-    public Translation dtoToDomain(TranslationRequest dto){
+    public Translation dtoToDomain(TranslationRequest dto) {
         if (dto == null) {
             return null;
         }
@@ -56,6 +54,7 @@ public class MapperService {
         domain.setTagName(tag);
         return domain;
     }
+
     public TagResponse domainToDto(Tag domain) {
         if (domain == null) {
             return null;

@@ -7,5 +7,6 @@ import com.tms.translationmanagementsystem.Dto.TranslationResponse;
 
 public interface SaveTranslationService {
     TranslationResponse create(TranslationRequest request) throws SaveTranslationException;
+
     TranslationResponse update(TranslationRequest request) throws FetchTranslationException, SaveTranslationException;
 }
